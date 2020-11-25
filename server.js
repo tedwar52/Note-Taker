@@ -24,12 +24,12 @@ var Notes = [];
 //Routes=============================================
 
 //HTML ROUTES
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../Develop/public/index.html"));
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "../Develop/public/notes.html"));
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 
 //API ROUTES
@@ -38,6 +38,7 @@ app.get("/api/notes", function (req, res) {
 });
 
 //create new note
+
 app.post("/api/notes", function (req, res) {
     var newNote = req.body;
     console.log(newNote);
@@ -49,6 +50,7 @@ app.delete("/api/notes/:id", function (req, res) {
     var currentNote = req.params.id;
     console.log(currentNote);
 })
+
 
 //Start=Server========================================
 
