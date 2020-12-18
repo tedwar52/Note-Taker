@@ -5,6 +5,7 @@ var path = require("path");
 var fs = require("fs");
 //var Notes = require("./db/notes.js");
 var db = require("./db/db.json");
+const { v4: uuidv4 } = require('uuid');
 
 //=================================================
 
@@ -19,7 +20,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 //Data===============================================
 
-const Notes = [{ title: "", text: "" }];
+const Notes = [];
 //this might need to be moved to db.json
 
 //Routes=============================================
@@ -44,6 +45,7 @@ app.get("/api/notes", function (req, res) {
 app.post("/api/notes", function (req, res) {
     var newNote = req.body;
     console.log(newNote);
+    newNote.id = uuidv4();
     Notes.push(newNote);
     //console.log(Notes);
     const saveNotes = JSON.stringify(Notes);
@@ -54,6 +56,7 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", function (req, res) {
     var currentNote = req.params.id;
     console.log(currentNote);
+    n
 })
 
 
