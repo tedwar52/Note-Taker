@@ -3,7 +3,6 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
-//var Notes = require("./db/notes.js");
 var db = require("./db/db.json");
 const { v4: uuidv4 } = require('uuid');
 
@@ -21,7 +20,6 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 //Data===============================================
 
 const Notes = [];
-//this might need to be moved to db.json
 
 //Routes=============================================
 
@@ -40,7 +38,7 @@ app.get("/api/notes", function (req, res) {
     
 });
 
-//Create New Note
+//Create New Notes
 //this takes in JSON input
 app.post("/api/notes", function (req, res) {
     var newNote = req.body;
@@ -53,6 +51,7 @@ app.post("/api/notes", function (req, res) {
     fs.writeFileSync(__dirname + "/db/db.json", saveNotes);
 });
 
+//Delete Saved Notes
 app.delete("/api/notes/:id", function (req, res) {
     var currentNote = req.params.id;
     console.log(currentNote);
@@ -62,10 +61,10 @@ app.delete("/api/notes/:id", function (req, res) {
     res.json(update);
     fs.writeFileSync(__dirname + "/db/db.json", update);
 
-})
+});
 
 
-//Start=Server========================================
+//Start-Server========================================
 
 app.listen(PORT, function () {
     console.log("it's running on PORT" + PORT);
