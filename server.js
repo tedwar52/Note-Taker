@@ -45,7 +45,7 @@ app.post("/api/notes", function (req, res) {
     console.log(newNote);
     Notes.push(newNote);
     console.log(Notes);
-    fs.writeFileSync(__dirname + "/db/db.json", JSON.stringify(newNote));
+    fs.appendFileSync(__dirname + "/db/db.json", JSON.stringify(newNote));
     res.json(newNote);
 });
 
