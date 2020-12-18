@@ -3,7 +3,7 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
-var Notes = require("./db/notes.js");
+//var Notes = require("./db/notes.js");
 var db = require("./db/db.json");
 
 //=================================================
@@ -18,7 +18,7 @@ app.use(express.json());
 
 //Data===============================================
 
-//var Notes = [];
+var Notes = [];
 //this might need to be moved to db.json
 
 //Routes=============================================
@@ -34,16 +34,18 @@ app.get("/notes", function (req, res) {
 
 //API ROUTES
 app.get("/api/notes", function (req, res) {
-    return res.json(Notes);
+    res.sendFile(path.join(__dirname, "/db/db.json"));
     
 });
 
-//create new note
-
+//Create New Note
+//this takes in JSON input
 app.post("/api/notes", function (req, res) {
     var newNote = req.body;
     console.log(newNote);
-    db.push(newNote);
+    Notes.push(newNote);
+    console.log(Notes);
+    fs.writeFileSync(__dirname + "/db/db.json", JSON.stringify(newNote));
     res.json(newNote);
 });
 

@@ -22,13 +22,24 @@ function readNotes() {
        })
 
        //Make those notes display
-       showNotes(Notes)
-   });
+       //showNotes(Notes)
+   })
+   .then(function (data) {
+       const savedStuff = showNotes(Notes)
+
+       return readFileAsync("db.json", savedStuff)
+   })
+   .then(function () {
+       console.log("successfully did something");
+   })
+   .catch(function (err) {
+       console.log(err);
+   })
+
 }
 
-function saveNotes() {
-    
-}
+
+readNotes();
 
 function showNotes(data) {
     return `
