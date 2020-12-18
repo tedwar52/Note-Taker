@@ -15,10 +15,11 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 //Data===============================================
 
-var Notes = [{ title: "", text: "" }];
+const Notes = [{ title: "", text: "" }];
 //this might need to be moved to db.json
 
 //Routes=============================================
@@ -34,7 +35,7 @@ app.get("/notes", function (req, res) {
 
 //API ROUTES
 app.get("/api/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "/db/db.json"));
+    res.sendFile(path.join(__dirname + "/db/db.json"));
     
 });
 
@@ -44,10 +45,10 @@ app.post("/api/notes", function (req, res) {
     var newNote = req.body;
     console.log(newNote);
     Notes.push(newNote);
-    console.log(Notes);
-    const saveNotes = JSON.stringify(Notes)
-    fs.appendFileSync(__dirname + "/db/db.json", saveNotes);
+    //console.log(Notes);
+    const saveNotes = JSON.stringify(Notes);
     res.json(saveNotes);
+    fs.writeFileSync(__dirname + "/db/db.json", saveNotes);
 });
 
 app.delete("/api/notes/:id", function (req, res) {
