@@ -56,7 +56,12 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", function (req, res) {
     var currentNote = req.params.id;
     console.log(currentNote);
-    n
+    db = db.filter(newNote => newNote.id !=req.params.id);
+    console.log(db);
+    const update = JSON.stringify(db);
+    res.json(update);
+    fs.writeFileSync(__dirname + "/db/db.json", update);
+
 })
 
 
