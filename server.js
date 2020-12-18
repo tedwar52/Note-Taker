@@ -18,7 +18,7 @@ app.use(express.json());
 
 //Data===============================================
 
-var Notes = [];
+var Notes = [{ title: "", text: "" }];
 //this might need to be moved to db.json
 
 //Routes=============================================
@@ -45,8 +45,9 @@ app.post("/api/notes", function (req, res) {
     console.log(newNote);
     Notes.push(newNote);
     console.log(Notes);
-    fs.appendFileSync(__dirname + "/db/db.json", JSON.stringify(newNote));
-    res.json(newNote);
+    const saveNotes = JSON.stringify(Notes)
+    fs.appendFileSync(__dirname + "/db/db.json", saveNotes);
+    res.json(saveNotes);
 });
 
 app.delete("/api/notes/:id", function (req, res) {
