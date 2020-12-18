@@ -28,4 +28,4 @@ No testing required
 <a name="More">**_See more about this_**</a>
 
 [Github link](https://github.com/tedwar52/Note-Taker)  
-[Deployed on Heroku](https://gentle-journey-55469.herokuapp.com/)
+[Deployed on Heroku](http://blooming-lake-16321.herokuapp.com/)
